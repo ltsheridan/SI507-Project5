@@ -1,2 +1,0 @@
-client_key="Jt6BOvWfjLEZmBMJ57duzl9NyMTVEs8jrNFwZ7wJbTciDaw6GT"
-client_secret="RTvn6oVaE4XIpDKk1R68is83aUxp11E1mVHRXrme4ZLQ4e9oJ1"
