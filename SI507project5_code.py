@@ -4,6 +4,7 @@ import webbrowser
 import json
 import secret_data
 from datetime import datetime
+import csv
 
 ## CACHING SETUP
 #(Cite - 507 code from oauth1_twitter_caching.py - setting up caching constants)
@@ -189,26 +190,36 @@ if __name__ == "__main__":
 
     # Invoke functions
     tumblr_baseurl = "https://api.tumblr.com/v2/tagged"
-    tumblr_search_params = {"tag":"millenials", "limit":10}
+    tumblr_search_params = {"tag":"millenials", "limit":30}
 
     tumblr_result = get_data_from_api(tumblr_baseurl,"Tumblr",tumblr_search_params) # Default expire_in_days
-    result_list=[]
-    # for tag in tumblr_result:
-    #     tag_list.append(tumblr_result['response'][0]['tags'])
-    # # print(tumblr_result['response'][0]['tags'])
-    # print (tag_list)
+    # print(json.dumps(tumblr_result, indent=2, sort_keys=True))
 
-    tag_list = tumblr_result['response'][0]['tags']
-    for tag in tag_list:
-        result_list.append(tag)
-    print (result_list)
-#stopping for today
+    result_list1=[]
+    result_list2=[]
+    result_list3=[]
+    # tag_list = tumblr_result['response'][0]['tags']
+
+    for post in tumblr_result['response']:
+        result_list1.append(post['date'])
+        result_list2.append(post['blog_name'])
+        result_list3.append(post['tags'])
+
+    # print (result_list1, result_list2, result_list3)
+
+
 
 ## ADDITIONAL CODE for program should go here...
 ## Perhaps authentication setup, functions to get and process data, a class definition... etc.
 
+def csv_function1(filename, listname):
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(["Date","Blog Name","Tags"])
+        for post in listname['response']:
+            post['tags'].sort()
+            writer.writerow([post['date'],post['blog_name'],post['tags']])
 
-
-
+csv_function1("Tumblr.csv", tumblr_result)
 
 ## Make sure to run your code and write CSV files by the end of the program.
