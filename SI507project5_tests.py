@@ -18,8 +18,7 @@ class TumblrTest(unittest.TestCase):
         self.assertEqual(type(self.response),type({}))
 
     def test_tumblr_data3(self):
-        self.assertEqual(self.tags, ['my mom', 'parents', 'millenials', 'emojis'])
-
+        self.assertEqual(self.tags, ['emojis','millenials','my mom','parents'])
     def test_tumblr_data4(self):
         self.assertEqual(self.blogname, 'kerek-the-unhallowed')
 
