@@ -197,8 +197,6 @@ if __name__ == "__main__":
 
     tumblr_result_example1=tumblr_result['response'][0]
     tumblr_result_example2=tumblr_result['response'][0]['blog_name']
-    print (tumblr_result_example2)
-
 
 
     #TEST CODE (keep)
@@ -221,7 +219,7 @@ if __name__ == "__main__":
     # print(tag, tag_count)
 
 ## ADDITIONAL CODE for program should go here...
-## Perhaps authentication setup, functions to get and process data, a class definition... etc.
+## Perhaps authenticatiyuon setup, functions to get and process data, a class definition... etc.
 
 def csv_function1(filename, listname):
     with open(filename, 'w', newline='') as f:
