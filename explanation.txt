@@ -1,1 +1,9 @@
 Put your Project 5 brief explanation, as directed, here.
+I am accessing the Tumblr search API and gathering:
+- 30 blog posts for the tag "millenials"
+- For each post, I'll be accessing the tags millenials and all tags associated with millenials, the blog_name, and the date.
+- After the tags are accessed, the second function counts the number of time the tags occur
+- I'll write 2 CSV files
+- Data in the first CSV file: 3 columns -- Date, Blog Name and Tags
+- Data in the second CSV file: 2 columns -- Tumblr Tag Count and Tag
+- URL for the API: https://api.tumblr.com/v2/tagged
