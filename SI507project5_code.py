@@ -9,7 +9,7 @@ import csv
 ## CACHING SETUP
 #(Cite - 507 code from oauth1_twitter_caching.py - setting up caching constants)
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
-DEBUG = True
+DEBUG = False
 CACHE_FNAME = "cache_contents.json"
 CREDS_CACHE_FILE = "creds.json"
 
@@ -190,24 +190,35 @@ if __name__ == "__main__":
 
     # Invoke functions
     tumblr_baseurl = "https://api.tumblr.com/v2/tagged"
-    tumblr_search_params = {"tag":"millenials", "limit":30}
+    tumblr_search_params = {"tag":"millenials", "limit":20}
 
     tumblr_result = get_data_from_api(tumblr_baseurl,"Tumblr",tumblr_search_params) # Default expire_in_days
     # print(json.dumps(tumblr_result, indent=2, sort_keys=True))
 
-    result_list1=[]
-    result_list2=[]
-    result_list3=[]
+    tumblr_result_example1=tumblr_result['response'][0]
+    tumblr_result_example2=tumblr_result['response'][0]['blog_name']
+    print (tumblr_result_example2)
+
+
+
+    #TEST CODE (keep)
     # tag_list = tumblr_result['response'][0]['tags']
-
-    for post in tumblr_result['response']:
-        result_list1.append(post['date'])
-        result_list2.append(post['blog_name'])
-        result_list3.append(post['tags'])
-
-    # print (result_list1, result_list2, result_list3)
-
-
+    # result_list=[]
+    # for post in tumblr_result['response']:
+    #     for tag in post['tags']:
+    #         result_list.append(tag)
+    # # print(result_list)
+    #
+    # # for tag in result_list:
+    #     # print(tag_count, tag)
+    #     # print(tag)
+    #
+    # for post in tumblr_result['response']:
+    #     for tag in post['tags']:
+    #         result_list.append(tag)
+    # for tag in result_list:
+    #     tag_count = result_list.count(tag)
+    # print(tag, tag_count)
 
 ## ADDITIONAL CODE for program should go here...
 ## Perhaps authentication setup, functions to get and process data, a class definition... etc.
@@ -220,6 +231,19 @@ def csv_function1(filename, listname):
             post['tags'].sort()
             writer.writerow([post['date'],post['blog_name'],post['tags']])
 
-csv_function1("Tumblr.csv", tumblr_result)
+# csv_function1("Tumblr.csv", tumblr_result)
 
+def csv_function2(filename, listname):
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(["Tumblr Tag Count","Tag"])
+        result_list=[]
+        for post in listname['response']:
+            for tag in post['tags']:
+                result_list.append(tag)
+        for tag in result_list:
+            tag_count = result_list.count(tag)
+            writer.writerow([tag_count, tag])
+
+# csv_function2("Tumblr2.csv", tumblr_result)
 ## Make sure to run your code and write CSV files by the end of the program.
