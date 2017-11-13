@@ -180,23 +180,23 @@ def get_data_from_api(request_url,service_ident, params_diction, expire_in_days=
     return data
 
 
-if __name__ == "__main__":
-    if not CLIENT_KEY or not CLIENT_SECRET:
-        print("You need to fill in client_key and client_secret in the secret_data.py file.")
-        exit()
-    if not REQUEST_TOKEN_URL or not BASE_AUTH_URL:
-        print("You need to fill in this API's specific OAuth2 URLs in this file.")
-        exit()
+    if __name__ == "__main__":
+        if not CLIENT_KEY or not CLIENT_SECRET:
+            print("You need to fill in client_key and client_secret in the secret_data.py file.")
+            exit()
+        if not REQUEST_TOKEN_URL or not BASE_AUTH_URL:
+            print("You need to fill in this API's specific OAuth2 URLs in this file.")
+            exit()
 
-    # Invoke functions
-    tumblr_baseurl = "https://api.tumblr.com/v2/tagged"
-    tumblr_search_params = {"tag":"millenials", "limit":20}
+# Invoke functions
+tumblr_baseurl = "https://api.tumblr.com/v2/tagged"
+tumblr_search_params = {"tag":"millenials", "limit":20}
 
-    tumblr_result = get_data_from_api(tumblr_baseurl,"Tumblr",tumblr_search_params) # Default expire_in_days
-    # print(json.dumps(tumblr_result, indent=2, sort_keys=True))
+tumblr_result = get_data_from_api(tumblr_baseurl,"Tumblr",tumblr_search_params) # Default expire_in_days
+# print(json.dumps(tumblr_result, indent=2, sort_keys=True))
 
-    tumblr_result_example1=tumblr_result['response'][0]
-    tumblr_result_example2=tumblr_result['response'][0]['blog_name']
+tumblr_result_example1=tumblr_result['response'][0]
+tumblr_result_example2=tumblr_result['response'][0]['blog_name']
 
 
     #TEST CODE (keep)
@@ -229,7 +229,7 @@ def csv_function1(filename, listname):
             post['tags'].sort()
             writer.writerow([post['date'],post['blog_name'],post['tags']])
 
-# csv_function1("Tumblr.csv", tumblr_result)
+csv_function1("Tumblr.csv", tumblr_result)
 
 def csv_function2(filename, listname):
     with open(filename, 'w', newline='') as f:
@@ -243,5 +243,5 @@ def csv_function2(filename, listname):
             tag_count = result_list.count(tag)
             writer.writerow([tag_count, tag])
 
-# csv_function2("Tumblr2.csv", tumblr_result)
+csv_function2("Tumblr2.csv", tumblr_result)
 ## Make sure to run your code and write CSV files by the end of the program.
